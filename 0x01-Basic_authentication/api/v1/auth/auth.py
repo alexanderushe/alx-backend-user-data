@@ -22,9 +22,9 @@ class Auth:
             return True
 
         normalized_path = path.rstrip('/') + '/'
-        normalized_excluded_paths = [p.rstrip('/') + '/' for p in excluded_paths]
+        norm_ex_paths = [p.rstrip('/') + '/' for p in excluded_paths]
 
-        return normalized_path not in normalized_excluded_paths
+        return normalized_path not in norm_ex_paths
 
     def authorization_header(self, request=None) -> str:
         """ Method to get authorization header.
