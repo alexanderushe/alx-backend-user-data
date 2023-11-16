@@ -2,11 +2,14 @@
 ''' function that returns the
 log message obfuscated
 '''
+
 import logging
 import re
 from typing import List
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
 def filter_datum(
         fields: List[str], redaction: str, message: str, separator: str
         ) -> str:
@@ -42,5 +45,8 @@ class RedactingFormatter(logging.Formatter):
         super(RedactingFormatter, self).__init__(self.FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
-        record.message = filter_datum(self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
+        '''formats a logrecord
+        '''
+        record.message = filter_datum(
+            self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
         return super(RedactingFormatter, self).format(record)
